@@ -21,11 +21,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
 
 
 app_flask = Flask(__name__ , static_url_path='/static')
-app_flask.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app_flask.config['SECRET_KEY'] = 'fabd84a78d4713d603ac4d5b'
+app_flask.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app_flask.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 db = SQLAlchemy(app_flask)
 bcrypt = Bcrypt(app_flask)
 login_manager = LoginManager(app_flask)

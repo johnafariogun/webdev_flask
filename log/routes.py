@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from log import app_flask, db
 from .models import Log, User
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, LogForm
 from flask_login import login_user, logout_user
 
 
@@ -60,6 +60,17 @@ def login():
         
     return render_template('login.html', form=form)
 
+@app_flask.route('/book', methods=['GET', 'POST'])
+def book():
+    form = LogForm()
+    if form.validate_on_submit():
+        log = Log(name=form.name.data, pick_up=form.pick_up.data,
+                        delivery=form.delivery.data, description=form.description.data, 
+                        shipping=form.shipping.data)
+        db.session.add(log)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('book.html', form=form)
 
 @app_flask.route('/logout')
 def logout():

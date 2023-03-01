@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from log.models import User
 
@@ -28,3 +28,12 @@ class LoginForm(FlaskForm):
     username = StringField(label='username', validators=[DataRequired()])
     password = PasswordField(label='password', validators=[ DataRequired()])
     submit = SubmitField(label='login')
+
+
+class LogForm(FlaskForm):
+    name = StringField(label='name', validators=[DataRequired()])
+    pick_up = StringField(label='Pick up', validators=[DataRequired()])
+    delivery = StringField(label='Delivery', validators=[DataRequired()])
+    description = StringField(label='Delivery', validators=[DataRequired()])
+    shipping = IntegerField(label='Shipping fees', validators=[DataRequired()])
+    submit = SubmitField(label='book')

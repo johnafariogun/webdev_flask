@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class='form'>
+        <form method="POST" action="">
+            {{form.hidden_tag()}}
+            
+            {% for i in form %}
+               <p>{{i.label}} {{i(placeholder='{{i.label}}')}}</p>
+            {% endfor %}
+                
+        </form>
+    </div>
+{% endblock content %}
+    

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+        <h3>Some of our previous jobs are:</h3>
+       <br>
+       {% for log in logs_ %}
+           <h4>{{log['name']}}</h4>
+           <p>We delivered to {{log['delivery']}} from {{log['pick_up']}} for {{log['shipping']}} </p>
+           <p>{{log['description']}}</p>
+           <hr><br>
+       {% endfor %}
+      
+    </article>
+{% endblock content %}
+    

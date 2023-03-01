@@ -23,10 +23,13 @@ def users():
 def api_log():
     return jsonify(logs)
 
-@app_flask.route('/log/<i>')
-def log_single(i):
-    i=int(i)
-    return render_template("about.html", log=logs[i])
+@app_flask.route('/log/<int:id_>')
+def log_single(id_):
+    log = Log.query.filter_by(id=id_).first()
+    if log == None:
+        flash(f'There is no log with id corresponding with {id_}')
+    print(log)
+    return render_template("about.html", log=log)
 
 @app_flask.route('/register', methods=['GET', 'POST'])
 def register():
